@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rspec/common/version"
-require "rspec/common/matchers"
-require "rspec/common/shared_examples"
+
+# Don't require anything by default.  Users should require the parts they want
+# individually, or everything from the 'all' file.
 
