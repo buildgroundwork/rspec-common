@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('rspec-core')
   spec.add_dependency('rspec-rails')
   spec.add_dependency('rspec-collection_matchers')
+  spec.add_dependency('rack-test')
 
   spec.add_development_dependency('rake')
   spec.add_development_dependency('rubocop')
