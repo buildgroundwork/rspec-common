@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     rspec-common (0.1.0)
+      rack-test
       rspec-collection_matchers
       rspec-core
       rspec-rails
