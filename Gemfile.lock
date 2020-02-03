@@ -2,10 +2,10 @@ PATH
   remote: .
   specs:
     rspec-common (0.1.0)
-      rack-test
-      rspec-collection_matchers
-      rspec-core
-      rspec-rails
+      rack-test (~> 1.1)
+      rspec-collection_matchers (~> 1.2)
+      rspec-core (~> 3.9)
+      rspec-rails (~> 4.0.0.beta4)
 
 GEM
   remote: https://rubygems.org/
@@ -108,11 +108,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  rake
+  rake (~> 13.0)
   rspec-common!
-  rubocop
-  rubocop-rails
-  rubocop-rspec
+  rubocop (~> 0.79)
+  rubocop-rails (~> 2.4)
+  rubocop-rspec (~> 1.37)
 
 BUNDLED WITH
    2.1.4
