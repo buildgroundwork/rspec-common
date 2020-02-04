@@ -53,7 +53,6 @@ class JsonElementMatcher
     message = parent.failure_message
     message += " with element #{keys.join('/')}"
     message += " with value '#{value}'" if expecting_value
-    message += " but was #{actual}"
     message
   end
 
