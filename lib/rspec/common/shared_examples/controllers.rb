@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples_for "an action that requires authentication" do
+RSpec.shared_examples_for "an action that requires authentication" do |redirect: :login_path|
   context "with no authenticated user" do
     before { sign_out(:user) }
 
     it "should not succeed" do
       subject.call
       if controller.is_navigational_format?
-        expect(response).to redirect_to(login_path)
+        redirect_path = public_send(redirect)
+        expect(response).to redirect_to(redirect_path)
       else
-        expect(response.response_code).to eq(401)
+        expect(response.response_code).to be(401)
       end
     end
   end
