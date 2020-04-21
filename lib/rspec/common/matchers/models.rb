@@ -32,7 +32,12 @@ RSpec::Matchers.define :create_record do |model_class|
   def records_for(relation)
     if @proc_attributes
       relation = relation.select do |record|
-        @proc_attributes.all? { |name, block| record.public_send(name) == block.call }
+        @proc_attributes.all? do |name, block|
+          methods = name.to_s.split(".")
+          expected = block.call
+          actual = methods.inject(record) { |receiver, method| receiver.public_send(method) }
+          actual == expected
+        end
       end
     end
 
