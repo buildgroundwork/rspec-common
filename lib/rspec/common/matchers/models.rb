@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 RSpec::Matchers.define :create_record do |model_class|
   chain :where do |**attributes|
     @proc_attributes, @value_attributes =
@@ -30,18 +31,20 @@ RSpec::Matchers.define :create_record do |model_class|
   private
 
   def records_for(relation)
-    if @proc_attributes
-      relation = relation.select do |record|
-        @proc_attributes.all? do |name, block|
-          methods = name.to_s.split(".")
-          expected = block.call
-          actual = methods.inject(record) { |receiver, method| receiver.public_send(method) }
-          actual == expected
-        end
-      end
-    end
-
+    relation = filter_by_proc_attributes(relation) if @proc_attributes
     relation
   end
+
+  def filter_by_proc_attributes(relation)
+    relation.select do |record|
+      @proc_attributes.all? do |name, block|
+        expected = block.call
+        methods = name.to_s.split(".")
+        actual = methods.inject(record) { |receiver, method| receiver.public_send(method) }
+        actual == expected
+      end
+    end
+  end
 end
+# rubocop:enable Metrics/BlockLength
 
