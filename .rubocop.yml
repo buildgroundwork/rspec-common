@@ -98,10 +98,6 @@ Style/BlockDelimiters:
   Exclude:
     - spec/views/**/*
 
-# Better to be explicit with multiple hashes lying around.
-Style/BracesAroundHashParameters:
-  EnforcedStyle: context_dependent
-
 # Compactness is next to godliness.
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
