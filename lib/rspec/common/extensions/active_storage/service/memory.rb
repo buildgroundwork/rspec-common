@@ -67,7 +67,7 @@ module ActiveStorage
       end
     end
 
-    def url(key, **)
+    def url(key, filename: , **)
       instrument(:url, key: key) do |payload|
         payload[:url] = "http://test.host/#{filename}"
       end
