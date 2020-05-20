@@ -43,7 +43,7 @@ RSpec.shared_examples_for "an action that responds with" do |*acceptable_formats
     end
   end
 
-  (%i(html js json xml csv) - acceptable_formats.collect(&:to_sym)).each do |unacceptable_format|
+  (%i[html js json xml csv] - acceptable_formats.collect(&:to_sym)).each do |unacceptable_format|
     context "expecting a response in #{unacceptable_format} format" do
       let(:format) { unacceptable_format }
       it { should respond_with_status(:not_acceptable) }

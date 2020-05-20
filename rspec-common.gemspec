@@ -1,4 +1,6 @@
-require_relative 'lib/rspec/common/version'
+# frozen_string_literal: true
+
+require_relative "lib/rspec/common/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "rspec-common"
@@ -6,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Adam Milligan"]
   spec.email         = ["adam@buildgroundwork.com"]
 
-  spec.summary       = %q{Helpful shared examples and matchers for Rails.}
+  spec.summary       = "Helpful shared examples and matchers for Rails."
   spec.homepage      = "https://github.com/buildgroundwork/rspec-common"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.6.0")
@@ -19,17 +21,15 @@ Gem::Specification.new do |spec|
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  spec.files = Dir.chdir(File.expand_path('..', __FILE__)) { `git ls-files -z`.split("\x0") }
+  spec.files = Dir.chdir(File.expand_path(__dir__)) { `git ls-files -z`.split("\x0") }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency('rspec-core', '~> 3.9')
-  spec.add_dependency('rspec-rails', '~> 4.0.0.beta4')
-  spec.add_dependency('rspec-collection_matchers', '~> 1.2')
-  spec.add_dependency('rack-test', '~> 1.1')
+  spec.add_dependency("rack-test", "~> 1.1")
+  spec.add_dependency("rspec-collection_matchers", "~> 1.2")
+  spec.add_dependency("rspec-core", "~> 3.9")
+  spec.add_dependency("rspec-rails", "~> 4.0.0.beta4")
 
-  spec.add_development_dependency('rake', '~> 13.0')
-  spec.add_development_dependency('rubocop', '~> 0.79')
-  spec.add_development_dependency('rubocop-rails', '~> 2.4')
-  spec.add_development_dependency('rubocop-rspec', '~> 1.37')
+  spec.add_development_dependency("rake", "~> 13.0")
+  spec.add_development_dependency("rubocop", "~> 0.79")
 end
 
