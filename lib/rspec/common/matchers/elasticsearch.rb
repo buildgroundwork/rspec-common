@@ -22,3 +22,30 @@
   end
 end
 
+RSpec::Matchers.define :search_elasticsearch_index do |index|
+  chain :with_query do |query|
+    @query = query
+  end
+
+  match do |_results|
+    @search_calls = Doubles::Elasticsearch::Client.calls[:search]
+    matching = @search_calls.select { |call| call[:index] == index.to_s }
+    if @query == :none
+      matching = matching.select { |call| call[:body][:query][:bool][:must].empty? }
+    elsif @query
+      matching = matching.select { |call| call[:body][:query][:bool][:must].include?(@query) }
+    end
+    matching.one?
+  end
+
+  failure_message do
+    message = "expected one call to search index '#{index}'"
+    message += " with query #{@query}" if @query
+    message += "\n\n\tActual calls:\n"
+    @search_calls.each do |call|
+      message += "\t#{call}\n"
+    end
+    message
+  end
+end
+
