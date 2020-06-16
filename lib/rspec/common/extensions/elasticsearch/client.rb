@@ -67,12 +67,6 @@ begin
       end
     end
   end
-
-  Elasticsearch::Client.class_eval do
-    def new(*)
-      Doubles::Elasticsearch::Client.new
-    end
-  end
 rescue LoadError
 end
 
