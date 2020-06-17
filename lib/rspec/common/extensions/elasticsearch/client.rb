@@ -17,14 +17,13 @@ begin
             @calls ||= {}
           end
 
-          def return(ids: , total_count: nil)
-            @to_return = {
-              ids: ids,
-              total_count: total_count
-            }
+          def return(**kwargs)
+            @response_builder = ResponseBuilder.new(**kwargs)
           end
 
-          attr_reader :to_return
+          def response_builder
+            @response_builder ||= ResponseBuilder.new
+          end
         end
 
         def initialize(*args); end
@@ -48,21 +47,7 @@ begin
           self.class.calls[:search] ||= []
           self.class.calls[:search] << params
 
-          search_results
-        end
-
-        private
-
-        def search_results
-          hits, total_count =
-            if (to_return = self.class.to_return)
-              ids = to_return[:ids].collect { |id| { "_id" => id } }
-              total_count = to_return[:total_count] || ids.count
-              [ids, total_count]
-            else
-              [[], 0]
-            end
-          { "hits" => { "total" => { "value" => total_count }, "hits" => hits } }
+          self.class.response_builder.response
         end
       end
     end
