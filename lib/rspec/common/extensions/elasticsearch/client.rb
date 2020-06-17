@@ -70,8 +70,8 @@ begin
 rescue LoadError
 end
 
-def elasticsearch_return(*args)
-  Doubles::Elasticsearch::Client.return(*args)
+def elasticsearch_return(*args, **kwargs)
+  Doubles::Elasticsearch::Client.return(*args, **kwargs)
 end
 # rubocop:enable Lint/SuppressedException
 
