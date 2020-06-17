@@ -7,23 +7,28 @@ begin
   module Doubles
     module Elasticsearch
       class ResponseBuilder
-        def initialize(ids: [], total_count: nil)
+        def initialize(ids: [], total_count: nil, aggregations: nil)
           @ids = ids
-          @total_count = total_count || ids.size
+          @total_count = total_count
+          @aggregations = aggregations
         end
 
         def response
-          {
+          response = {
             "hits" => {
-              "total" => { "value" => total_count },
+              "total" => { "value" => total_count || ids.size },
               "hits" => ids.collect { |id| { "_id" => id } }
             }
           }
+
+          response["aggregations"] = aggregations
+
+          response
         end
 
         private
 
-        attr_reader :ids, :total_count
+        attr_reader :ids, :total_count, :aggregations
       end
     end
   end
