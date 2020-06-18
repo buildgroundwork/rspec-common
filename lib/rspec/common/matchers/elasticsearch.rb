@@ -61,14 +61,14 @@ RSpec::Matchers.define :search_elasticsearch_index do |index|
 
   failure_message do
     message = "expected one call to search index '#{index}'"
-    message += " with body #{@body}" if @body
     message += " with query #{@query}" if @query
     @aggregations&.each do |name, attributes|
       message += " with aggregation #{name}: #{attributes}"
     end
-    message += "\n\n\tActual calls:\n"
-    @search_calls.each do |call|
-      message += "\t#{call}\n"
+    message += " with body\n#{@body}" if @body
+    message += "\n\nActual calls:"
+    @search_calls.each_with_index do |call, index|
+      message += "\n\n## Body #{index}:\n#{call[:body]}\n## Other top-level keys:\n#{call.except(:body)}"
     end
     message
   end
