@@ -33,6 +33,10 @@ RSpec::Matchers.define :search_elasticsearch_index do |index|
     @aggregations[name] = attributes
   end
 
+  chain :with_body do |body|
+    @body = body
+  end
+
   match do |_results|
     @search_calls = Doubles::Elasticsearch::Client.calls[:search]
     matching = @search_calls.select { |call| call[:index] == index.to_s }
@@ -50,11 +54,14 @@ RSpec::Matchers.define :search_elasticsearch_index do |index|
       end
     end
 
+    matching = matching.select { |call| call[:body] == @body } if @body
+
     matching.one?
   end
 
   failure_message do
     message = "expected one call to search index '#{index}'"
+    message += " with body #{@body}" if @body
     message += " with query #{@query}" if @query
     @aggregations&.each do |name, attributes|
       message += " with aggregation #{name}: #{attributes}"
