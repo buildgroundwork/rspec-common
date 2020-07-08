@@ -46,7 +46,7 @@ class JsonElementMatcher
   def matches?(actual)
     @actual = actual
     match = results_for(actual)
-    expecting_value ? match == value : match
+    expecting_value ? has_keys? && match == value : match
   end
 
   def failure_message
@@ -68,6 +68,21 @@ class JsonElementMatcher
     hash = parent.results_for(json)
     hash.dig(*keys) if hash.is_a?(Hash)
   end
+
+  # rubocop:disable Naming/PredicateName
+  def has_keys?
+    hash = parent.results_for(actual)
+
+    keys.inject(true) do |memo, key|
+      if memo && hash.has_key?(key)
+        hash = hash[key]
+        true
+      else
+        false
+      end
+    end
+  end
+  # rubocop:enable Naming/PredicateName
 end
 
 class JsonArrayMatcher
