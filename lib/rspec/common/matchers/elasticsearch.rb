@@ -67,8 +67,8 @@ RSpec::Matchers.define :search_elasticsearch_index do |index|
     end
     message += " with body\n#{@body}" if @body
     message += "\n\nActual calls:"
-    @search_calls.each_with_index do |call, index|
-      message += "\n\n## Body #{index}:\n#{call[:body]}\n## Other top-level keys:\n#{call.except(:body)}"
+    @search_calls.each_with_index do |call, idx|
+      message += "\n\n## Body #{idx}:\n#{call[:body]}\n## Other top-level keys:\n#{call.except(:body)}"
     end
     message
   end

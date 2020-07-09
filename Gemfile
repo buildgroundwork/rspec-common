@@ -4,7 +4,6 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "groundwork-style", github: "buildgroundwork/groundwork-style"
-gem "rubocop", github: "buildgroundwork/rubocop"
 
 gemspec
 
