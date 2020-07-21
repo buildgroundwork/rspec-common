@@ -38,7 +38,7 @@ class JsonElementMatcher
   end
 
   def with_value(expected)
-    @value = expected
+    @value = expected.as_json
     @expecting_value = true
     self
   end
