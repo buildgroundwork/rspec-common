@@ -93,7 +93,7 @@ class JsonArrayMatcher
   end
 
   def failure_message
-    parent.failure_message + " be array"
+    "#{parent.failure_message} be array"
   end
 
   def description
@@ -151,7 +151,7 @@ class JsonContainsMatcher
   end
 
   def failure_message
-    parent.failure_message + " containing a specific element"
+    "#{parent.failure_message} containing a specific element"
   end
 
   def description
@@ -175,7 +175,7 @@ class JsonMatcherAnd
   end
 
   def failure_message
-    parent.failure_message + " and"
+    "#{parent.failure_message} and"
   end
 end
 
