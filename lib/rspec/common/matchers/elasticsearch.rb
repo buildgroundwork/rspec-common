@@ -22,6 +22,30 @@
   end
 end
 
+RSpec::Matchers.define :bulk_update_elasticsearch_index_with do |documents|
+  match do |block|
+    Doubles::Elasticsearch::Client.reset!
+
+    block.call
+
+    @matches = Doubles::Elasticsearch::Client.calls[:bulk]
+    @matches&.one?
+
+    bulk_update_params = {
+      index: "documents",
+      body: documents.collect do |document|
+        { update: { _id: document.uuid, data: { doc: document.to_elasticsearch } } }
+      end
+    }
+
+    @matches.first == bulk_update_params
+  end
+
+  failure_message do
+    "expected to bulk update Elasticsearch index with documents #{documents.collect(&:id)}"
+  end
+end
+
 # rubocop:disable Metrics/BlockLength
 RSpec::Matchers.define :search_elasticsearch_index do |index|
   chain :with_query do |query|

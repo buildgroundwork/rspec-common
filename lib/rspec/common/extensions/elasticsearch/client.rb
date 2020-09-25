@@ -33,22 +33,23 @@ begin
           self.class.calls[:create] << params
         end
 
-        def update(**params)
-          self.class.calls[:update] ||= []
-          self.class.calls[:update] << params
-        end
-
-        def delete(**params)
-          self.class.calls[:delete] ||= []
-          self.class.calls[:delete] << params
-        end
-
         def search(params)
           self.class.calls[:search] ||= []
           self.class.calls[:search] << params
 
           self.class.response_builder.response
         end
+
+        # rubocop:disable Lint/MissingSuper
+        def method_missing(method, *_args, **params, &_block)
+          self.class.calls[method] ||= []
+          self.class.calls[method] << params
+        end
+
+        def respond_to_missing?(*)
+          true
+        end
+        # rubocop:enable Lint/MissingSuper
       end
     end
   end
