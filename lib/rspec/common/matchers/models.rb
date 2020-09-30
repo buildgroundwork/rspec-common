@@ -11,17 +11,19 @@ RSpec::Matchers.define :create_record do |model_class|
 
   match do |action|
     relation = model_class.all
+    existing_ids = relation.pluck(:id)
+
     relation = relation.where(**@value_attributes) if @value_attributes.try(:any?)
 
-    before_count = records_for(relation).size
     action.call
 
-    after_count = records_for(relation.reload).size
-    after_count == before_count + 1
+    @created_count = records_for(relation.where.not(id: existing_ids)).size
+
+    @created_count == 1
   end
 
   failure_message do
-    "expected action to create a #{model_class} record"
+    "expected action to create 1 #{model_class} record, but created #{@created_count}"
   end
 
   failure_message_when_negated do |actual|
