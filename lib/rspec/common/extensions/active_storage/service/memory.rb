@@ -37,7 +37,7 @@ module ActiveStorage
     def download(key, &block)
       verify!(key)
 
-      if block_given?
+      if block
         instrument(:streaming_download, key: key) { stream(key, &block) }
       else
         instrument(:download, key: key) { storage[key].force_encoding(Encoding::BINARY) }

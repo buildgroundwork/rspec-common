@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = "Helpful shared examples and matchers for Rails."
   spec.homepage      = "https://github.com/buildgroundwork/rspec-common"
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.6.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 2.7.0")
 
   spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
@@ -30,6 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency("rspec-rails", "~> 4.0.0.beta4")
 
   spec.add_development_dependency("rake", "~> 13.0")
-  spec.add_development_dependency("rubocop", "~> 0.79")
+  spec.add_development_dependency("rubocop")
 end
 
