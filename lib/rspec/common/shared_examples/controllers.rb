@@ -6,7 +6,7 @@ RSpec.shared_examples_for "an action that requires authentication" do |redirect:
 
     it "should not succeed" do
       subject.call
-      if controller.is_navigational_format?
+      if controller.is_navigational_format? && redirect
         redirect_path = public_send(redirect)
         expect(response).to redirect_to(redirect_path)
       else
