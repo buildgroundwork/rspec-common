@@ -49,7 +49,6 @@ begin
           { "errors" => false }
         end
 
-        # rubocop:disable Lint/MissingSuper
         def method_missing(method, *_args, **params, &_block)
           self.class.calls[method] ||= []
           self.class.calls[method] << params
@@ -60,7 +59,6 @@ begin
         def respond_to_missing?(*)
           true
         end
-        # rubocop:enable Lint/MissingSuper
       end
     end
   end
