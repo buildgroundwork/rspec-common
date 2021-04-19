@@ -26,8 +26,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency("rack-test", "~> 1.1")
   spec.add_dependency("rspec-collection_matchers", "~> 1.2")
-  spec.add_dependency("rspec-core", "~> 3.9")
-  spec.add_dependency("rspec-rails", "~> 5.0")
+  spec.add_dependency("rspec-core", "~> 3.10", ">= 3.10.1")
+  spec.add_dependency("rspec-rails", "~> 5.0", ">= 5.0.1")
 
   spec.add_development_dependency("rake", "~> 13.0")
   spec.add_development_dependency("rubocop")
