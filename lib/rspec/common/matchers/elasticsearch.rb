@@ -29,7 +29,6 @@ RSpec::Matchers.define :bulk_update_elasticsearch_index_with do |records, index:
     block.call
 
     @matches = Doubles::Elasticsearch::Client.calls[:bulk]
-    @matches&.one?
 
     bulk_update_params = {
       # Elasticsearch prefixes index names with "test_" in the test environment only.
@@ -39,7 +38,7 @@ RSpec::Matchers.define :bulk_update_elasticsearch_index_with do |records, index:
       end
     }
 
-    @matches.first == bulk_update_params
+    @matches&.one? && @matches.first == bulk_update_params
   end
 
   failure_message do
