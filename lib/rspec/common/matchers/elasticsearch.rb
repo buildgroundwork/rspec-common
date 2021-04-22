@@ -22,7 +22,7 @@
   end
 end
 
-RSpec::Matchers.define :bulk_update_elasticsearch_index_with do |documents|
+RSpec::Matchers.define :bulk_update_elasticsearch_index_with do |records, index: , id_attr: :id|
   match do |block|
     Doubles::Elasticsearch::Client.reset!
 
@@ -32,9 +32,10 @@ RSpec::Matchers.define :bulk_update_elasticsearch_index_with do |documents|
     @matches&.one?
 
     bulk_update_params = {
-      index: "documents",
-      body: documents.collect do |document|
-        { update: { _id: document.uuid, data: { doc: document.to_elasticsearch } } }
+      # Elasticsearch prefixes index names with "test_" in the test environment only.
+      index: "test_#{index}",
+      body: records.collect do |record|
+        { index: { _id: record.public_send(id_attr), data: record.to_elasticsearch } }
       end
     }
 
@@ -42,7 +43,7 @@ RSpec::Matchers.define :bulk_update_elasticsearch_index_with do |documents|
   end
 
   failure_message do
-    "expected to bulk update Elasticsearch index with documents #{documents.collect(&:id)}"
+    "expected to bulk update Elasticsearch index with records #{records.collect(&:id)}"
   end
 end
 
