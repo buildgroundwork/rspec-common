@@ -14,7 +14,7 @@
 module RSpec::Common
   module Helpers
     module ControllerExceptions
-      def process(*)
+      def process(...)
         super
       rescue ActiveRecord::RecordNotFound, ActionController::RoutingError
         @response.status = 404
