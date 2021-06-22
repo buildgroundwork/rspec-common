@@ -2,7 +2,9 @@
 
 # rubocop:disable Metrics/BlockLength
 RSpec::Matchers.define :create_record do |model_class|
-  chain :where do |*, **attributes|
+  chain :where do |attributes|
+    raise ArgumentError unless attributes.is_a?(Hash)
+
     @proc_attributes, @value_attributes =
       attributes
         .partition { |_, v| v.is_a?(Proc) }
