@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ActiveStorage
-  class Service::Configurator #:nodoc:
+  class Service::Configurator # :nodoc:
     private
 
     # This is copied from the ActiveStorage gem in order to remove the first
