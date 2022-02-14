@@ -16,7 +16,7 @@ module RSpec::Common
         private
 
         def add_pundit_to_test_views
-          view.singleton_class.instance_eval { include ::Pundit }
+          view.singleton_class.instance_eval { include ::Pundit::Authorization }
         end
       end
     end
