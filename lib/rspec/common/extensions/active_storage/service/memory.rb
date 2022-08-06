@@ -27,7 +27,7 @@ module ActiveStorage
     end
 
     def upload(key, io, checksum: nil, **)
-      instrument(:upload, key: key, checksum: checksum) do
+      instrument(:upload, key:, checksum:) do
         content = io.read
         ensure_integrity_of(content, checksum) if checksum
         write(key, content)
@@ -38,16 +38,16 @@ module ActiveStorage
       verify!(key)
 
       if block
-        instrument(:streaming_download, key: key) { stream(key, &block) }
+        instrument(:streaming_download, key:) { stream(key, &block) }
       else
-        instrument(:download, key: key) { storage[key].force_encoding(Encoding::BINARY) }
+        instrument(:download, key:) { storage[key].force_encoding(Encoding::BINARY) }
       end
     end
 
     def download_chunk(key, range)
       verify!(key)
 
-      instrument(:download_chunk, key: key, range: range) do
+      instrument(:download_chunk, key:, range:) do
         io = StringIO.new(storage[key])
         io.seek(range.begin)
         io.read(range.size).force_encoding(Encoding::BINARY)
@@ -55,29 +55,29 @@ module ActiveStorage
     end
 
     def delete(key)
-      instrument(:delete, key: key) { storage.delete(key) }
+      instrument(:delete, key:) { storage.delete(key) }
     end
 
     def delete_prefixed(prefix)
-      instrument(:delete_prefixed, prefix: prefix) do
+      instrument(:delete_prefixed, prefix:) do
         storage.keys.grep(/\A#{prefix}/).each { |key| delete(key) }
       end
     end
 
     def exist?(key)
-      instrument(:exist, key: key) do |payload|
+      instrument(:exist, key:) do |payload|
         payload[:exist] = storage.has_key?(key)
       end
     end
 
     def url(key, filename: , **)
-      instrument(:url, key: key) do |payload|
+      instrument(:url, key:) do |payload|
         payload[:url] = "http://test.host/#{filename}"
       end
     end
 
     def url_for_direct_upload(key, **)
-      instrument(:url, key: key) do |payload|
+      instrument(:url, key:) do |payload|
         payload[:url] = "http://test.upload.host/#{key}"
       end
     end

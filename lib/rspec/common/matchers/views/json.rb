@@ -7,8 +7,8 @@ module JsonMatcherChains
 
   attr_reader :parent
 
-  def containing(&block)
-    JsonContainsMatcher.new(self, &block)
+  def containing(&)
+    JsonContainsMatcher.new(self, &)
   end
 
   def of_length(length)

@@ -49,7 +49,7 @@ begin
           { "errors" => false }
         end
 
-        def method_missing(method, *_args, **params, &_block)
+        def method_missing(method, *_args, **params)
           self.class.calls[method] ||= []
           self.class.calls[method] << params
 
