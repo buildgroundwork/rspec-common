@@ -61,3 +61,22 @@ RSpec::Matchers.define :have_no_streams do
   end
 end
 
+RSpec::Matchers.define :transmit do |message|
+  match do |action|
+    old_transmissions = transmissions
+    action.call
+    @new_transmissions = transmissions - old_transmissions
+
+    @new_transmissions.any?(message.as_json)
+  end
+
+  failure_message do
+    "Expected channel to transmit #{message.as_json}\n\n" \
+      "Actual transmissions: #{@new_transmissions}"
+  end
+
+  failure_message_when_negated do
+    "Expected channel not to transmit #{params}, but it did"
+  end
+end
+
