@@ -76,7 +76,7 @@ RSpec::Matchers.define :transmit do |message|
   end
 
   failure_message_when_negated do
-    "Expected channel not to transmit #{params}, but it did"
+    "Expected channel not to transmit #{message.as_json}, but it did"
   end
 end
 
