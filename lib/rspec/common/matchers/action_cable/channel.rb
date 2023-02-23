@@ -67,7 +67,11 @@ RSpec::Matchers.define :transmit do |message|
     action.call
     @new_transmissions = transmissions - old_transmissions
 
-    @new_transmissions.any?(message.as_json)
+    if message == :anything
+      @new_transmissions.any?
+    else
+      @new_transmissions.any?(message.as_json)
+    end
   end
 
   failure_message do
