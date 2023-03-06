@@ -14,9 +14,7 @@
 module ActiveStorage
   class Service::MemoryService < Service
     # We explicity do NOT want the super behavior from ActiveStorage
-    # rubocop:disable Lint/MissingSuper
     def initialize(**config); end
-    # rubocop:enable Lint/MissingSuper
 
     def reset!
       @storage = nil
