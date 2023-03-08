@@ -49,6 +49,17 @@ RSpec::Matchers.define :respond_with_template do |template_name|
   end
 end
 
+RSpec::Matchers.define :respond_with_text do |text|
+  match do |block|
+    block.call
+    response.body == text
+  end
+
+  failure_message do
+    "expected response body text to be '#{text}' but was '#{response.body}'"
+  end
+end
+
 RSpec::Matchers.define :assign do |*vars|
   match do |block|
     block.call
