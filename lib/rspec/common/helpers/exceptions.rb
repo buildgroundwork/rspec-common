@@ -5,13 +5,11 @@ module RSpec::Common
     module Exceptions
       # rubocop:disable Lint/RescueException
       def fallible(suppress: :runtime)
-        raise ArgumentError unless %i[none runtime all].include?(suppress)
-
         yield
-      rescue
-        raise if suppress == :none
-      rescue Exception
-        raise unless suppress == :all
+      rescue => e
+        raise unless suppress == :all || suppress == :runtime || e.is_a?(suppress)
+      rescue Exception => e
+        raise unless suppress == :all || e.is_a?(suppress)
       end
       # rubocop:enable Lint/RescueException
     end
