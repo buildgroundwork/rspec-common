@@ -50,5 +50,21 @@ RSpec::Matchers.define :create_record do |model_class|
     end
   end
 end
+
+RSpec::Matchers.define :destroy_record do |model|
+  match do |action|
+    action.call
+
+    model.class.where(id: model).none?
+  end
+
+  failure_message do
+    "expected action to destroy #{model}, but did not"
+  end
+
+  failure_message_when_negated do
+    "expected action to not destroy #{model}, but the record was destroyed"
+  end
+end
 # rubocop:enable Metrics/BlockLength
 
