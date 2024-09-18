@@ -36,7 +36,7 @@ RSpec::Matchers.define :send_rollbar_report do |level|
   end
 
   def failure_message
-    message = +"Expected Rollbar to receive report with level '#{@level}'"
+    message = "Expected Rollbar to receive report with level '#{@level}'"
     message << " exactly once" if @once
     message << "\n    with message #{@message.inspect}" if @message
     message << "\n    with exception class #{@exception_class}" if @exception_class
