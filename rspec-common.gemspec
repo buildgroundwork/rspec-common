@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency("rack-test", "~> 2.0")
   spec.add_dependency("rspec-collection_matchers", "~> 1.2")
   spec.add_dependency("rspec-core", "~> 3.10", ">= 3.10.1")
-  spec.add_dependency("rspec-rails", "~> 6.0")
+  spec.add_dependency("rspec-rails", "~> 7.0")
 
   spec.add_development_dependency("rake", "~> 13.0", ">= 13.0.3")
   spec.metadata = { "rubygems_mfa_required" => "true" }
