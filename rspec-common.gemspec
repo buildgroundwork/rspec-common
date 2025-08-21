@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency("rspec-collection_matchers")
   spec.add_dependency("rspec-core")
   spec.add_dependency("rspec-expectations")
-  spec.add_dependency("rspec-rails")
+  spec.add_dependency("rspec-rails", "~> 8.0")
 
   spec.add_development_dependency("rake")
   spec.add_development_dependency("standard")
