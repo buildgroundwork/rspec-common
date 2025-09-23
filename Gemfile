@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'rails', '~> 8.0'
+gem "groundwork-style", github: "buildgroundwork/groundwork-style", branch: :main
 
 gemspec

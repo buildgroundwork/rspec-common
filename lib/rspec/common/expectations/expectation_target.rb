@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'rspec/core/memoized_helpers'
-require 'rspec/expectations/expectation_target'
+require "rspec/core/memoized_helpers"
+require "rspec/expectations/expectation_target"
 
 # The RSpec team decided that they don't like the "implicit block expectation
 # syntax," e.g.:
@@ -24,10 +24,8 @@ require 'rspec/expectations/expectation_target'
 # other styles is too draconian for my tastes.  This removes the unnecessary
 # style enforcement.
 module RSpec
-  module Core
-    module MemoizedHelpers
-      def enforce_value_expectation(matcher, method_name); end
-    end
+  module Core::MemoizedHelpers
+    def enforce_value_expectation(matcher, method_name); end
   end
 
   module Expectations
@@ -37,3 +35,4 @@ module RSpec
     end
   end
 end
+

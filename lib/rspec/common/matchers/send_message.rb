@@ -21,7 +21,7 @@ RSpec::Matchers.define :send_message do |message|
   end
 
   match do |action|
-    raise 'The `send_message` matcher requires a receiver' unless receiver
+    raise "The `send_message` matcher requires a receiver" unless receiver
 
     allow(receiver).to receive(message)
 
@@ -33,3 +33,4 @@ RSpec::Matchers.define :send_message do |message|
     expect(receiver).to(match)
   end
 end
+
