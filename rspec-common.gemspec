@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency('rack-test')
-  spec.add_dependency('rails', '>= 6.1', '< 8.1')
+  spec.add_dependency('rails', '>= 6.1', '< 8.2')
   spec.add_dependency('rspec-collection_matchers')
   spec.add_dependency('rspec-core')
   spec.add_dependency('rspec-expectations')
