@@ -7,11 +7,11 @@ RSpec::Matchers.define :confirm_subscription do
   end
 
   failure_message do
-    "Expected subscription to be confirmed"
+    'Expected subscription to be confirmed'
   end
 
   failure_message_when_negated do
-    "Expected subscription not to be confirmed"
+    'Expected subscription not to be confirmed'
   end
 end
 
@@ -22,11 +22,11 @@ RSpec::Matchers.define :reject_subscription do
   end
 
   failure_message do
-    "Expected subscription to be rejected"
+    'Expected subscription to be rejected'
   end
 
   failure_message_when_negated do
-    "Expected subscription not to be rejected"
+    'Expected subscription not to be rejected'
   end
 end
 
@@ -53,11 +53,11 @@ RSpec::Matchers.define :have_no_streams do
   end
 
   failure_message do
-    "Expected subscription to have no streams"
+    'Expected subscription to have no streams'
   end
 
   failure_message_when_negated do
-    "Expected subscription to have streams"
+    'Expected subscription to have streams'
   end
 end
 
@@ -83,4 +83,3 @@ RSpec::Matchers.define :transmit do |message|
     "Expected channel not to transmit #{message.as_json}, but it did"
   end
 end
-

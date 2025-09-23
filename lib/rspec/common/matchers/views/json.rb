@@ -54,7 +54,7 @@ class JsonElementMatcher
   end
 
   def failure_message(negated: false)
-    preposition = negated ? "without" : "with"
+    preposition = negated ? 'without' : 'with'
     message = parent.failure_message(negated:)
     message += " #{preposition} element #{keys.join('/')}"
     message += " #{preposition} value '#{value}'" if expecting_value
@@ -62,7 +62,7 @@ class JsonElementMatcher
   end
 
   def description
-    "have JSON element"
+    'have JSON element'
   end
 
   private
@@ -79,7 +79,7 @@ class JsonElementMatcher
     hash = parent.results_for(actual)
 
     keys.inject(true) do |memo, key|
-      if memo && hash.has_key?(key)
+      if memo && hash.key?(key)
         hash = hash[key]
         true
       else
@@ -102,7 +102,7 @@ class JsonArrayMatcher
   end
 
   def description
-    "be JSON array"
+    'be JSON array'
   end
 
   private
@@ -130,7 +130,7 @@ class JsonLengthMatcher
   end
 
   def description
-    "have length"
+    'have length'
   end
 
   private
@@ -160,7 +160,7 @@ class JsonContainsMatcher
   end
 
   def description
-    "contain JSON element"
+    'contain JSON element'
   end
 
   private
@@ -192,7 +192,7 @@ class JsonMatcherRoot
   end
 
   def failure_message(**)
-    "expected a JSON response"
+    'expected a JSON response'
   end
 
   def results_for(json)
@@ -211,4 +211,3 @@ define_method :have_json_element do |*elements|
   JsonElementMatcher.new(JsonMatcherRoot.instance, *elements)
 end
 # rubocop:enable Naming/PredicateName
-

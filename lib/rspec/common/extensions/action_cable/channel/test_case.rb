@@ -10,40 +10,41 @@
 # as well as adding the #receive_broadcast test method.  To test the a stream
 # with a callback simply call #receive_broadcast with the stream name and the
 # content (in JSON format) that you expect the channel to receive.
-module ActionCable::Channel
-  module BetterChannelStub
-    def stream_from(broadcasting, callback = nil, coder: nil, &block)
-      handler = test_stream_handler(broadcasting, callback || block, coder:)
-      streams[broadcasting] = handler
-    end
-
-    def test_stream_handler(broadcasting, user_handler, coder: )
-      handler = stream_handler(broadcasting, user_handler, coder:)
-      ->(message) { handler.call(message) }
-    end
-
-    def stop_all_streams
-      @_streams = {}
-    end
-
-    # This is from Rails.
-    # rubocop:disable Naming/MemoizedInstanceVariableName
-    def streams
-      @_streams ||= {}
-    end
-    # rubocop:enable Naming/MemoizedInstanceVariableName
-  end
-
-  ChannelStub.prepend(BetterChannelStub)
-
-  class TestCase
-    module BetterBehavior
-      def receive_broadcast(stream, data)
-        @subscription.streams.fetch(stream).call(data)
+module ActionCable
+  module Channel
+    module BetterChannelStub
+      def stream_from(broadcasting, callback = nil, coder: nil, &block)
+        handler = test_stream_handler(broadcasting, callback || block, coder:)
+        streams[broadcasting] = handler
       end
+
+      def test_stream_handler(broadcasting, user_handler, coder:)
+        handler = stream_handler(broadcasting, user_handler, coder:)
+        ->(message) { handler.call(message) }
+      end
+
+      def stop_all_streams
+        @_streams = {}
+      end
+
+      # This is from Rails.
+      # rubocop:disable Naming/MemoizedInstanceVariableName
+      def streams
+        @_streams ||= {}
+      end
+      # rubocop:enable Naming/MemoizedInstanceVariableName
     end
 
-    Behavior.include BetterBehavior
+    ChannelStub.prepend(BetterChannelStub)
+
+    class TestCase
+      module BetterBehavior
+        def receive_broadcast(stream, data)
+          @subscription.streams.fetch(stream).call(data)
+        end
+      end
+
+      Behavior.include BetterBehavior
+    end
   end
 end
-

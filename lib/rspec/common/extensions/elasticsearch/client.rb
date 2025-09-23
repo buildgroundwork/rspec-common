@@ -2,7 +2,7 @@
 
 # rubocop:disable Lint/SuppressedException
 begin
-  require "elasticsearch/model"
+  require 'elasticsearch/model'
 
   module Doubles
     module Elasticsearch
@@ -46,7 +46,7 @@ begin
           self.class.calls[:bulk] ||= []
           self.class.calls[:bulk] << params
 
-          { "errors" => false }
+          { 'errors' => false }
         end
 
         def method_missing(method, *_args, **params)
@@ -69,4 +69,3 @@ def elasticsearch_return(*args, **kwargs)
   Doubles::Elasticsearch::Client.return(*args, **kwargs)
 end
 # rubocop:enable Lint/SuppressedException
-
