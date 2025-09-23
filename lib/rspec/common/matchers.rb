@@ -1,4 +1,6 @@
-Dir.glob(File.expand_path("matchers/**/*.rb", __dir__)).each do |path|
+# frozen_string_literal: true
+
+Dir.glob(File.expand_path('matchers/**/*.rb', __dir__)).each do |path|
   require path
 end
 
@@ -12,6 +14,6 @@ RSpec::Matchers.define :satisfy do
   end
 
   failure_message do
-    "expected action to satisfy expectation"
+    'expected action to satisfy expectation'
   end
 end

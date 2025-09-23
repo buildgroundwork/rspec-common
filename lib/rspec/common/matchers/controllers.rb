@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec::Matchers.define :respond_with_status do |expected_status|
   supports_block_expectations
 
@@ -32,7 +34,7 @@ class RespondWithRedirectMatcher
   end
 
   def description
-    "respond with redirect"
+    'respond with redirect'
   end
 end
 
@@ -84,7 +86,7 @@ RSpec::Matchers.define :set_flash do |type|
   end
 
   failure_message do |_actual|
-    message = "Expected flash#{".now" if @now}[#{type}] to "
+    message = "Expected flash#{'.now' if @now}[#{type}] to "
     if @expected_message
       "#{message} match '#{@expected_message}', but was '#{flash[type]}'"
     else

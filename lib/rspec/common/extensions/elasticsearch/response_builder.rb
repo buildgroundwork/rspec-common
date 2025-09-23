@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 # rubocop:disable Lint/SuppressedException
 begin
-  require "elasticsearch/model"
+  require 'elasticsearch/model'
 
   module Doubles
     module Elasticsearch
@@ -13,13 +15,13 @@ begin
 
         def response
           response = {
-            "hits" => {
-              "total" => {"value" => total_count || ids.size},
-              "hits" => ids.collect { |id| {"_id" => id} }
+            'hits' => {
+              'total' => { 'value' => total_count || ids.size },
+              'hits' => ids.collect { |id| { '_id' => id } }
             }
           }
 
-          response["aggregations"] = aggregations
+          response['aggregations'] = aggregations
 
           response
         end

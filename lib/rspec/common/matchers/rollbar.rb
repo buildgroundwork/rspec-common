@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Metrics/BlockLength
 RSpec::Matchers.define :send_rollbar_report do |level|
   supports_block_expectations
@@ -37,7 +39,7 @@ RSpec::Matchers.define :send_rollbar_report do |level|
 
   def failure_message
     message = "Expected Rollbar to receive report with level '#{@level}'"
-    message << " exactly once" if @once
+    message << ' exactly once' if @once
     message << "\n    with message #{@message.inspect}" if @message
     message << "\n    with exception class #{@exception_class}" if @exception_class
     message << "\n    with extra params #{@extra.inspect}" if @extra

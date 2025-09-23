@@ -1,9 +1,17 @@
-if defined?(Elasticsearch::Model::Naming)
-  module Elasticsearch::Model::Naming::ClassMethods
-    private
+# frozen_string_literal: true
 
-    def default_index_name
-      "test_#{model_name.collection.tr("/", "-")}"
+if defined?(Elasticsearch::Model::Naming)
+  module Elasticsearch
+    module Model
+      module Naming
+        module ClassMethods
+          private
+
+          def default_index_name
+            "test_#{model_name.collection.tr('/', '-')}"
+          end
+        end
+      end
     end
   end
 end

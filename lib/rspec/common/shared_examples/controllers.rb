@@ -1,8 +1,10 @@
-RSpec.shared_examples_for "an action that requires authentication" do |redirect: :login_path|
-  context "with no authenticated user" do
+# frozen_string_literal: true
+
+RSpec.shared_examples_for 'an action that requires authentication' do |redirect: :login_path|
+  context 'with no authenticated user' do
     before { sign_out(:user) }
 
-    it "should not succeed" do
+    it 'should not succeed' do
       subject.call
       if controller.is_navigational_format? && redirect
         redirect_path = public_send(redirect)
@@ -14,26 +16,26 @@ RSpec.shared_examples_for "an action that requires authentication" do |redirect:
   end
 end
 
-RSpec.shared_examples_for "an admin action that requires authentication" do
-  context "with no authenticated user" do
+RSpec.shared_examples_for 'an admin action that requires authentication' do
+  context 'with no authenticated user' do
     before { sign_out(:user) }
     it { should respond_with_status(:not_found) }
   end
 
-  context "with an authenticated non-admin user" do |non_admin_user: :bob|
+  context 'with an authenticated non-admin user' do |non_admin_user: :bob|
     before { sign_in(users(non_admin_user)) }
     it { should respond_with_status(:not_found) }
   end
 end
 
-RSpec.shared_examples_for "an action that requires authorization" do |unauthorized_user: :mallory|
-  context "when not authorized" do
+RSpec.shared_examples_for 'an action that requires authorization' do |unauthorized_user: :mallory|
+  context 'when not authorized' do
     before { sign_in(users(unauthorized_user)) }
     it { should respond_with_status(:not_found) }
   end
 end
 
-RSpec.shared_examples_for "an action that responds with" do |*acceptable_formats|
+RSpec.shared_examples_for 'an action that responds with' do |*acceptable_formats|
   acceptable_formats.each do |acceptable_format|
     context "expecting a response in #{acceptable_format} format" do
       let(:format) { acceptable_format }
@@ -49,10 +51,10 @@ RSpec.shared_examples_for "an action that responds with" do |*acceptable_formats
   end
 end
 
-RSpec.shared_examples_for "an action that requires" do |*resources|
+RSpec.shared_examples_for 'an action that requires' do |*resources|
   resources.each do |resource|
     context "with an invalid or missing #{resource}" do
-      let(resource) { double(id: "does_not_exist", to_param: "does_not_exist", reload: nil) }
+      let(resource) { double(id: 'does_not_exist', to_param: 'does_not_exist', reload: nil) }
       it { should respond_with_status(:missing) }
     end
   end

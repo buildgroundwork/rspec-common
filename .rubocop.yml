@@ -1,0 +1,12 @@
+# RuboCop configuration for rspec-common
+AllCops:
+  SuggestExtensions: false
+  NewCops: enable
+
+# Disable documentation requirements for this testing library
+Style/Documentation:
+  Enabled: false
+
+# Allow development dependencies in gemspec (common practice)
+Gemspec/DevelopmentDependencies:
+  Enabled: false

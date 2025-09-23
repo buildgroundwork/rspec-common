@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 # rubocop:disable Lint/SuppressedException
 begin
-  require "elasticsearch/model"
+  require 'elasticsearch/model'
 
   module Doubles
     module Elasticsearch
@@ -12,7 +14,7 @@ begin
           end
 
           def calls
-            @calls ||= Hash.new([])
+            @calls ||= Hash.new { |h, k| h[k] = [] }
           end
 
           def return(**kwargs)
@@ -24,8 +26,7 @@ begin
           end
         end
 
-        def initialize(*args)
-        end
+        def initialize(*args); end
 
         def index(**params)
           self.class.calls[:create] << params
@@ -42,10 +43,10 @@ begin
         def bulk(params)
           self.class.calls[:bulk] << params
 
-          {"errors" => false}
+          { 'errors' => false }
         end
 
-        def method_missing(method, *_args, **params, &_block)
+        def method_missing(method, *_args, **params, &)
           self.class.calls[method] << params
 
           nil

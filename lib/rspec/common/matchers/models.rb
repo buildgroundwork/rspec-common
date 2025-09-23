@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Metrics/BlockLength
 RSpec::Matchers.define :create_record do |model_class|
   supports_block_expectations
@@ -7,8 +9,8 @@ RSpec::Matchers.define :create_record do |model_class|
 
     @proc_attributes, @value_attributes =
       attributes
-        .partition { |_, v| v.is_a?(Proc) }
-        .collect(&:to_h)
+      .partition { |_, v| v.is_a?(Proc) }
+      .collect(&:to_h)
   end
 
   match do |action|
@@ -43,7 +45,7 @@ RSpec::Matchers.define :create_record do |model_class|
     relation.select do |record|
       @proc_attributes.all? do |name, block|
         expected = block.call
-        methods = name.to_s.split(".")
+        methods = name.to_s.split('.')
         actual = methods.inject(record) { |receiver, method| receiver.public_send(method) }
         actual == expected
       end

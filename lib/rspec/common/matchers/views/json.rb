@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module JsonMatcherChains
   def initialize(parent, *)
     @parent = parent
@@ -5,8 +7,8 @@ module JsonMatcherChains
 
   attr_reader :parent
 
-  def containing(&block)
-    JsonContainsMatcher.new(self, &block)
+  def containing(&)
+    JsonContainsMatcher.new(self, &)
   end
 
   def of_length(length)
@@ -49,13 +51,13 @@ class JsonElementMatcher
 
   def failure_message
     message = parent.failure_message
-    message += " with element #{keys.join("/")}"
+    message += " with element #{keys.join('/')}"
     message += " with value '#{value}'" if expecting_value
     message
   end
 
   def description
-    "have JSON element"
+    'have JSON element'
   end
 
   private
@@ -72,7 +74,7 @@ class JsonElementMatcher
     hash = parent.results_for(actual)
 
     keys.inject(true) do |memo, key|
-      if memo && hash.has_key?(key)
+      if memo && hash.key?(key)
         hash = hash[key]
         true
       else
@@ -95,7 +97,7 @@ class JsonArrayMatcher
   end
 
   def description
-    "be JSON array"
+    'be JSON array'
   end
 
   private
@@ -123,7 +125,7 @@ class JsonLengthMatcher
   end
 
   def description
-    "have length"
+    'have length'
   end
 
   private
@@ -153,7 +155,7 @@ class JsonContainsMatcher
   end
 
   def description
-    "contain JSON element"
+    'contain JSON element'
   end
 
   private
@@ -193,7 +195,7 @@ class JsonMatcherRoot
   private
 
   def initialize
-    @failure_message = "expected a JSON response"
+    @failure_message = 'expected a JSON response'
   end
 end
 
