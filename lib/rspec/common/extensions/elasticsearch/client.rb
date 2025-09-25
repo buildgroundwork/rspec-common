@@ -29,8 +29,8 @@ begin
         def initialize(*args); end
 
         def index(**params)
-          self.class.calls[:create] ||= []
-          self.class.calls[:create] << params
+          self.class.calls[:index] ||= []
+          self.class.calls[:index] << params
 
           nil
         end
