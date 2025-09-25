@@ -2,6 +2,7 @@
 
 # rubocop:disable Metrics/BlockLength
 RSpec::Matchers.define :send_rollbar_report do |level|
+  supports_block_expectations
   chain :with_exception_class do |exception_class|
     @exception_class = exception_class
   end
