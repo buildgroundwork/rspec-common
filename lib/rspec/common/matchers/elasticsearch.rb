@@ -66,7 +66,7 @@ RSpec::Matchers.define :search_elasticsearch_index do |index|
   end
 
   match do |_results|
-    @search_calls = Doubles::Elasticsearch::Client.calls[:search]
+    @search_calls = Doubles::Elasticsearch::Client.calls[:search] || []
     matching = @search_calls.select { |call| call[:index] == index.to_s }
 
     if @query == :none
