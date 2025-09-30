@@ -2,7 +2,10 @@
 
 RSpec::Matchers.define :respond_with_status do |expected_status|
   supports_block_expectations
-  supports_value_expectations
+
+  def supports_value_expectations?
+    true
+  end
 
   match do |action|
     action.call
@@ -46,7 +49,10 @@ end
 
 RSpec::Matchers.define :respond_with_template do |template_name|
   supports_block_expectations
-  supports_value_expectations
+
+  def supports_value_expectations?
+    true
+  end
 
   match do |block|
     block.call
@@ -56,7 +62,9 @@ RSpec::Matchers.define :respond_with_template do |template_name|
 end
 
 RSpec::Matchers.define :respond_with_text do |text|
-  supports_value_expectations
+  def supports_value_expectations?
+    true
+  end
 
   match do |block|
     block.call
@@ -70,7 +78,10 @@ end
 
 RSpec::Matchers.define :assign do |*vars|
   supports_block_expectations
-  supports_value_expectations
+
+  def supports_value_expectations?
+    true
+  end
 
   match do |block|
     block.call
@@ -80,7 +91,10 @@ end
 
 RSpec::Matchers.define :set_flash do |type|
   supports_block_expectations
-  supports_value_expectations
+
+  def supports_value_expectations?
+    true
+  end
 
   chain :to do |message|
     @expected_message = message

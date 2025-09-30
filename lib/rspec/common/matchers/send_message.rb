@@ -3,7 +3,9 @@
 MatchRefinement = Struct.new(:message, :args, :kwargs)
 
 RSpec::Matchers.define :send_message do |message|
-  supports_value_expectations
+  def supports_value_expectations?
+    true
+  end
 
   chain :to, :receiver
   chain :with, :args
