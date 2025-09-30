@@ -37,29 +37,12 @@ module RSpec
     end
   end
 
-  # RSpec 3.13+ compatibility: Override the implicit block expectation enforcement
+  # RSpec 8+ compatibility: Override the implicit block expectation enforcement
   module Core
     module MemoizedHelpers
       def enforce_implicit_block_expectation(matcher, method_name)
         # Allow implicit block expectations for all matchers
-        # This method is called by RSpec to check if implicit block expectations should be allowed
-        # Returning without raising or warning effectively allows the syntax
         true
-      end
-      
-      # Prevent deprecation warnings for implicit block expectations
-      def warn_for_implicit_block_expectation(matcher, method_name)
-        # Intentionally do nothing - suppress the deprecation warning
-        # The rspec-common gem allows implicit block expectations as a valid style choice
-      end
-    end
-  end
-  
-  # Also monkey-patch the ExpectationTarget to suppress warnings
-  module Expectations
-    class ExpectationTarget
-      def prevent_operator_matchers(verb)
-        # Allow all operator matchers without deprecation warnings
       end
     end
   end
