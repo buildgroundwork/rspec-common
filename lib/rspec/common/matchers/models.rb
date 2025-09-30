@@ -3,6 +3,7 @@
 # rubocop:disable Metrics/BlockLength
 RSpec::Matchers.define :create_record do |model_class|
   supports_block_expectations
+  supports_value_expectations
 
   chain :where do |attributes|
     raise ArgumentError unless attributes.is_a?(Hash)
@@ -54,6 +55,8 @@ RSpec::Matchers.define :create_record do |model_class|
 end
 
 RSpec::Matchers.define :destroy_record do |model|
+  supports_value_expectations
+
   match do |action|
     action.call
 

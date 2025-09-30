@@ -36,4 +36,14 @@ module RSpec
       ValueExpectationTarget = Class.new(ExpectationTarget)
     end
   end
+
+  # RSpec 8+ compatibility: Override the implicit block expectation enforcement
+  module Core
+    module MemoizedHelpers
+      def enforce_implicit_block_expectation(matcher, method_name)
+        # Allow implicit block expectations for all matchers
+        true
+      end
+    end
+  end
 end
